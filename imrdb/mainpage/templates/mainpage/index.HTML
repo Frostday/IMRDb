@@ -1,10 +1,16 @@
 <HTML>
 {% load static %}
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
     <!-- icons -->
     <script src="https://kit.fontawesome.com/a7e5305de0.js" crossorigin="anonymous"></script>
@@ -51,7 +57,9 @@
                     {% endif %}
                     <div class="card-body">
                         <p class="card-text text-white"><strong>{{ m.name }}</strong></p>
-                        <button class="btn btn-lg btn-block btn-primary bg-primary" type="button">{{ m.stars }}</button>
+                        {% load ratings %}
+                        <p style="color: white;">Your rating: </p>
+                        {% ratings m %}
                     </div>
                 </div>
             </div>

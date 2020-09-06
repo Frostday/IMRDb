@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_admin_generator',
+    'star_ratings',
     'mainpage',
 ]
 
@@ -68,6 +69,10 @@ TEMPLATES = [
         },
     },
 ]
+
+STAR_RATINGS_RERATE_SAME_DELETE = True
+
+TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request',]
 
 WSGI_APPLICATION = 'imrdb.wsgi.application'
 
