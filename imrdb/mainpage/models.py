@@ -8,7 +8,7 @@ import sys
 
 # Create your models here.
 class Movie(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    movie_id = models.IntegerField(blank = True, null = True)
     name = models.CharField(max_length=100)
     stars = models.SmallIntegerField(default = 0, validators=[MaxValueValidator(5)])
     image = models.ImageField(blank=True, null=True)
