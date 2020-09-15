@@ -5,6 +5,7 @@ from django.core.validators import MaxValueValidator
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from PIL import Image
 from io import BytesIO
+from django.utils import timezone.now
 import sys
 
 # Create your models here.
@@ -13,10 +14,10 @@ class Movie(models.Model):
     The model to store all movies.
 
     Attributes:
-    movie_id = In correspondance to ML model
-    name = Name of movie
-    stars = Rating given by user (maybe)
-    image = Poster of movie
+        movie_id = In correspondance to ML model
+        name = Name of movie
+        stars = Rating given by user (maybe)
+        image = Poster of movie
     '''
     movie_id = models.IntegerField(blank = True, null = True)
     name = models.CharField(max_length=100)
@@ -49,7 +50,7 @@ class UserInputs(models.Model):
     To send the user's data to ML model
 
     Attributes:
-    Idk under construction
+        Idk under construction
     '''
     movies_selected = models.ForeignKey(Movie, on_delete=models.PROTECT, null=True, blank=True)
 
@@ -73,11 +74,13 @@ class MLAlgorithm(models.Model):
         name: The name of the algorithm.
         description: The short description of how the algorithm works.
         code: The code of the algorithm.
+        created_at: The date when MLAlgorithm was added.
         parent_endpoint: The reference to the Endpoint.
     '''
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=1000)
     code = models.CharField(max_length=50000)
+    created_at = models.DateTimeField(blank=True, default=timezone.now)
     parent_endpoint = models.ForeignKey(Endpoint, on_delete=models.CASCADE)
 
 
@@ -86,12 +89,14 @@ class MLAlgorithmStatus(models.Model):
     The MLAlgorithmStatus represent status of the MLAlgorithm which can change during the time.
 
     Attributes:
+        status: The status of algorithm in the endpoint. Can be: testing, staging, production, ab_testing.
         active: The boolean flag which point to currently active status.
         created_by: The name of creator.
         created_at: The date of status creation.
         parent_mlalgorithm: The reference to corresponding MLAlgorithm.
 
     '''
+    status = models.CharField(max_length=128, null=True, blank=True)
     active = models.BooleanField()
     created_by = models.CharField(max_length=128)
     created_at = models.DateTimeField(auto_now_add=True, blank=True)
