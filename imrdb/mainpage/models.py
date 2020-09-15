@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from PIL import Image
 from io import BytesIO
-from django.utils import timezone.now
+from django.utils import timezone
 import sys
 
 # Create your models here.
