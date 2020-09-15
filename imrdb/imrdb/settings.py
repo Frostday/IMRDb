@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_admin_generator',
+    'rest_framework',
     'star_ratings',
     'mainpage',
 ]
@@ -71,6 +72,7 @@ TEMPLATES = [
 ]
 
 STAR_RATINGS_RERATE_SAME_DELETE = True
+STAR_RATINGS_ANONYMOUS = True
 
 TEMPLATE_CONTEXT_PROCESSORS = ['django.core.context_processors.request',]
 
