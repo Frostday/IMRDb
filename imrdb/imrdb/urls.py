@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from mainpage import views
+from mainpage.urls import urlpatterns as endpoint_urlpattens
 
 admin.site.site_header = "IMrDb Admin Panel"
 admin.site.site_title = "IMrDb Admin Panel"
@@ -29,3 +30,5 @@ urlpatterns = [
     path('', views.homepage, name='home'),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += endpoint_urlpattens
