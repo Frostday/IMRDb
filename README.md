@@ -25,5 +25,6 @@ Internet Movie Recommender Database made using HTML, CSS and Django. An autoenco
 
 7. Start the backend server using ```python manage.py runserver```
 
-Default port:8000
+Default port: 8000
+
 Open http://localhost:8000 to view it in the browser.
