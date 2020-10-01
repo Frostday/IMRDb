@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <!-- icons -->
     <script src="https://kit.fontawesome.com/a7e5305de0.js" crossorigin="anonymous"></script>
@@ -49,7 +50,7 @@
 
     <section id="grid">
         <div class="row" , style="padding: 30px;">
-            {% for m in movies.all %}
+            {% for m in movies %}
             <div class="pricing-col col-lg-3 col-md-4" , style="padding: 20px;">
                 <div class="card bg-dark">
                     {% if m.image %}
@@ -66,4 +67,26 @@
             {% endfor %}
         </div>
     </section>
+
+    {% if movies.has_other_pages %}
+    <ul class="pagination">
+        {% if movies.has_previous %}
+        <li><a href="?page={{ movies.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in movies.paginator.page_range %}
+        {% if movies.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if movies.has_next %}
+        <li><a href="?page={{ movies.next_page_number }}">&raquo;</a></li>
+        {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+    {% endif %}
 </body>
