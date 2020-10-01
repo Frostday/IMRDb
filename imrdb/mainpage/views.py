@@ -7,16 +7,27 @@ from rest_framework import mixins
 import pickle
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 
 
 # Create your views here.
 def homepage(request):
-    movies = Movie.objects.all()
-    query = request.GET.get("q")
-    if query:
-        movies = movies.filter(
-            Q(name__icontains=query)
-        ).distinct()
+    movies_list = Movie.objects.all()
+    page = request.GET.get('page', 1)
+    paginator = Paginator(movies_list, 48)
+    # query = request.GET.get("q")
+    # if query:
+    #     movies = movies.filter(
+    #         Q(name__icontains=query)
+    #     ).distinct()
+    try:
+        movies = paginator.page(page)
+    except PageNotAnInteger:
+        movies = paginator.page(1)
+    except EmptyPage:
+        movies = paginator.page(paginator.num_pages)
+
     return render(request, 'mainpage/index.html', {'movies': movies})
 
 
@@ -82,13 +93,11 @@ def predict():
         j = np.argmax(output)
         output[j] = 0
         l.append(j)
-    print(l)
     # indices
 
     ids = []
     for i in l:
         ids.append(cols[i])
-    print(ids)
     # movie ids
 
     names = []
