@@ -2,11 +2,7 @@ from django.shortcuts import render
 from .models import Movie
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
-from rest_framework import viewsets
-from rest_framework import mixins
 import pickle
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
@@ -15,12 +11,13 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def homepage(request):
     movies_list = Movie.objects.all()
     page = request.GET.get('page', 1)
+    query = request.GET.get("q")
+    if query:
+        movies_list = movies_list.filter(
+            Q(name__icontains=query)
+        ).distinct()
+
     paginator = Paginator(movies_list, 48)
-    # query = request.GET.get("q")
-    # if query:
-    #     movies = movies.filter(
-    #         Q(name__icontains=query)
-    #     ).distinct()
     try:
         movies = paginator.page(page)
     except PageNotAnInteger:
@@ -28,7 +25,10 @@ def homepage(request):
     except EmptyPage:
         movies = paginator.page(paginator.num_pages)
 
-    return render(request, 'mainpage/index.html', {'movies': movies})
+    if request.method == "POST":
+        predict()
+    else:
+        return render(request, 'mainpage/index.html', {'movies': movies})
 
 
 import numpy as np
@@ -59,6 +59,7 @@ class SAE(nn.Module):
 
 
 def predict():
+    print("called")
     dataset = pd.read_csv(os.path.dirname(os.path.realpath(__file__)) + "/ratings.csv")
     movies = pd.read_csv(os.path.dirname(os.path.realpath(__file__)) + "/filtered_movies.csv")
 

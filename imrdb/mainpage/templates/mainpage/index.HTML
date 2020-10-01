@@ -30,18 +30,23 @@
     <section id="search">
         <div class="row">
             <div class="col-sm-12 my-auto bg-dark">
-                <form class="container p-3 my-3 bg-transparent text-dark col-sm-5 rounded h-50" method="GET" action="">
+                <form class="container p-3 my-3 bg-transparent text-dark col-sm-5 rounded h-50">
                     <div style="padding-top: 30px;"></div>
+                    <form method="GET">
                     <div class="form-group card-block w-30 mx-auto">
                         <label for="name"><strong>Search</strong></label>
                         <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" id="anime_name" aria-describedby="emailHelp" placeholder="Enter Name of Movie">
                     </div>
+                    </form>
                     <div class="card card-block w-25 mx-auto bg-dark">
                         <button type="search" class="btn btn-primary">Search</button>
                     </div>
                     <div style="padding-top: 50px;"></div>
+                    <form method="POST">
                     <div class="card card-block mx-auto bg-success">
+                        {% csrf_token %}
                         <button type="recommend" class="btn btn-success">Recommend Movies</button>
+                    </form>
                     </div>
                 </form>
             </div>
@@ -53,7 +58,7 @@
             {% for m in movies %}
             <div class="pricing-col col-lg-3 col-md-4" , style="padding: 20px;">
                 <div class="card bg-dark">
-                    {% if m.image %}
+                    {% if m.image_url %}
                     <img class="card-img-top" src="{{ m.image_url }}" alt="Card image cap" width="200" height="300">
                     {% endif %}
                     <div class="card-body">
