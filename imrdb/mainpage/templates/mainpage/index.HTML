@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <!-- icons -->
     <script src="https://kit.fontawesome.com/a7e5305de0.js" crossorigin="anonymous"></script>
@@ -29,18 +30,23 @@
     <section id="search">
         <div class="row">
             <div class="col-sm-12 my-auto bg-dark">
-                <form class="container p-3 my-3 bg-transparent text-dark col-sm-5 rounded h-50" method="GET" action="">
+                <form class="container p-3 my-3 bg-transparent text-dark col-sm-5 rounded h-50">
                     <div style="padding-top: 30px;"></div>
+                    <form method="GET">
                     <div class="form-group card-block w-30 mx-auto">
                         <label for="name"><strong>Search</strong></label>
                         <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" id="anime_name" aria-describedby="emailHelp" placeholder="Enter Name of Movie">
                     </div>
+                    </form>
                     <div class="card card-block w-25 mx-auto bg-dark">
                         <button type="search" class="btn btn-primary">Search</button>
                     </div>
                     <div style="padding-top: 50px;"></div>
+                    <form method="POST">
                     <div class="card card-block mx-auto bg-success">
+                        {% csrf_token %}
                         <button type="recommend" class="btn btn-success">Recommend Movies</button>
+                    </form>
                     </div>
                 </form>
             </div>
@@ -49,10 +55,10 @@
 
     <section id="grid">
         <div class="row" , style="padding: 30px;">
-            {% for m in movies.all %}
+            {% for m in movies %}
             <div class="pricing-col col-lg-3 col-md-4" , style="padding: 20px;">
                 <div class="card bg-dark">
-                    {% if m.image %}
+                    {% if m.image_url %}
                     <img class="card-img-top" src="{{ m.image_url }}" alt="Card image cap" width="200" height="300">
                     {% endif %}
                     <div class="card-body">
@@ -66,4 +72,26 @@
             {% endfor %}
         </div>
     </section>
+
+    {% if movies.has_other_pages %}
+    <ul class="pagination">
+        {% if movies.has_previous %}
+        <li><a href="?page={{ movies.previous_page_number }}">&laquo;</a></li>
+        {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in movies.paginator.page_range %}
+        {% if movies.number == i %}
+            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+        {% else %}
+            <li><a href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if movies.has_next %}
+        <li><a href="?page={{ movies.next_page_number }}">&raquo;</a></li>
+        {% else %}
+        <li class="disabled"><span>&raquo;</span></li>
+        {% endif %}
+    </ul>
+    {% endif %}
 </body>
