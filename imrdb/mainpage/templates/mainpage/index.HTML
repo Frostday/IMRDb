@@ -74,7 +74,7 @@
     </section>
 
     {% if movies.has_other_pages %}
-    <ul class="pagination">
+    <ul class="pagination" style="padding: 1%;">
         {% if movies.has_previous %}
         <li><a href="?page={{ movies.previous_page_number }}">&laquo;</a></li>
         {% else %}
@@ -82,15 +82,15 @@
         {% endif %}
         {% for i in movies.paginator.page_range %}
         {% if movies.number == i %}
-            <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+            <li class="active" style="padding: 1%;"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
         {% else %}
             <li><a href="?page={{ i }}">{{ i }}</a></li>
         {% endif %}
         {% endfor %}
         {% if movies.has_next %}
-        <li><a href="?page={{ movies.next_page_number }}">&raquo;</a></li>
+        <li style="padding: 1%;"><a href="?page={{ movies.next_page_number }}">&raquo;</a></li>
         {% else %}
-        <li class="disabled"><span>&raquo;</span></li>
+        <li class="disabled" style="padding: 1%;"><span>&raquo;</span></li>
         {% endif %}
     </ul>
     {% endif %}

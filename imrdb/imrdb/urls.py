@@ -18,6 +18,10 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from mainpage import views
+from django.conf import settings
+from django.urls import re_path
+from django.views.static import serve
+
 
 admin.site.site_header = "IMrDb Admin Panel"
 admin.site.site_title = "IMrDb Admin Panel"
@@ -30,3 +34,9 @@ urlpatterns = [
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+if settings.DEBUG:
+    urlpatterns += [
+        re_path(r'^media/(?P<path>.*)$', serve, {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    ]
