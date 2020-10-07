@@ -19,7 +19,7 @@ def homepage(request):
             Q(name__icontains=query)
         ).distinct()
 
-    paginator = Paginator(movies_list, 48)
+    paginator = Paginator(movies_list, 24)
     try:
         movies = paginator.page(page)
     except PageNotAnInteger:
