@@ -42,12 +42,16 @@
                         <button type="search" class="btn btn-primary">Search</button>
                     </div>
                     <div style="padding-top: 50px;"></div>
+                    <div class="card card-block mx-auto bg-secondary">
+                        <button type="recommend" class="btn btn-secondary" onclick="location.href='{% url 'rated' %}'">Rated Movies</button>
+                    </div>
+                    <div style="padding-top: 20px;"></div>
                     <form method="POST">
                     <div class="card card-block mx-auto bg-success">
                         {% csrf_token %}
                         <button type="recommend" class="btn btn-success">Recommend Movies</button>
-                    </form>
                     </div>
+                    </form>
                 </form>
             </div>
         </div>

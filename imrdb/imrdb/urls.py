@@ -31,6 +31,7 @@ admin.site.enable_nav_sidebar = False
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.homepage, name='home'),
+    path('rated/', views.ratedpage, name='rated'),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

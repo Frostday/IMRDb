@@ -1,5 +1,4 @@
 <HTML>
-{% load static %}
 
 <head>
     <meta charset="utf-8">
@@ -26,36 +25,18 @@
     <div style="padding-top: 30px;"></div>
     <div class="container">
         <ul class="list-group bg-dark">
+            {% for key, value in dict.items %}
             <li class="list-group-item bg-dark text-white border border-white">
                 <div class="row">
                     <p style="font-size:200%; width: 85%; text-align: center;">
-                        Movie Name
+                        {{ key }}
                     </p>
                     <div style="text-align-last: right;">
-                        <span style="font-size:200%; color:yellow;">&starf;&starf;&starf;&starf;&star;</span>
+                        <span style="font-size:200%; color:yellow;">{{ value }} &star;</span>
                     </div>
                 </div>
             </li>
-            <li class="list-group-item bg-dark text-white border border-white">
-                <div class="row">
-                    <p style="font-size:200%; width: 85%; text-align: center;">
-                        Movie Name
-                    </p>
-                    <div style="text-align-last: right;">
-                        <span style="font-size:200%; color:yellow;">&starf;&starf;&starf;&starf;&star;</span>
-                    </div>
-                </div>
-            </li>
-            <li class="list-group-item bg-dark text-white border border-white">
-                <div class="row">
-                    <p style="font-size:200%; width: 85%; text-align: center;">
-                        Movie Name
-                    </p>
-                    <div style="text-align-last: right;">
-                        <span style="font-size:200%; color:yellow;">&starf;&starf;&starf;&starf;&star;</span>
-                    </div>
-                </div>
-            </li>
+            {% endfor %}
         </ul>
     </div>
 </body>
