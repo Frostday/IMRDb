@@ -28,10 +28,22 @@ def homepage(request):
         movies = paginator.page(paginator.num_pages)
 
     if request.method == "POST":
-        names = predict()
-        return HttpResponse(names)
+        ids = predict()
+        l = []
+        for id in ids:
+            l.append(Movie.objects.get(movie_id=id))
+        return render(request, 'mainpage/results.html', {'results': l})
     else:
         return render(request, 'mainpage/index.html', {'movies': movies})
+
+def ratedpage(request):
+    user_ratings = UserRating.objects.all()
+    d = {}
+    for index in user_ratings:
+        movie = Movie.objects.get(id=index.rating.object_id)
+        d[movie.name] = index.score
+    print(d)
+    return render(request, 'mainpage/rated.html', {'dict': d})
 
 
 import numpy as np
@@ -125,6 +137,7 @@ def predict():
     for i in l:
         ids.append(cols[i])
     # movie ids
+    print(ids)
 
     names = []
     for i in ids:
@@ -133,6 +146,6 @@ def predict():
         names.append(value)
     print(names)
 
-    return names
+    return ids
 
 
