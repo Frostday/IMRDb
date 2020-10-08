@@ -1,6 +1,6 @@
 # IMRDb
 
-Internet Movie Recommender Database made using HTML, CSS and Django. An autoencoder was used for making the actual recommendation. It was trained on the ml-25m dataset and Pytorch framework was used for making the neural network.
+Internet Movie Recommender Database is a website made using HTML, CSS and Django. An autoencoder was used for making the actual recommendation. It was trained on the ml-25m(small version) dataset.
 
 ## Creators
  
@@ -10,21 +10,36 @@ Internet Movie Recommender Database made using HTML, CSS and Django. An autoenco
 ## Setting up and running the project
 
 1. Fork the repo and clone it.
+```
+git clone https://github.com/Frostday/IMRDb.git
+```
+2. Activate your virtual/conda environment and move into the imrdb folder.
+```
+cd imrdb
+```
+3. To download the required packages run the commands below 
+```
+pip install -r requirements.txt
+```
+4. After the above setup, run the following commands
+```
+python manage.py makemigrations
+python manage.py migrate
+python manage.py loaddata movies
+```
+5. Start the backend server using 
+```
+python manage.py runserver
+```
+6. Open the url below to view it in the browser.
+```
+http://localhost:8000
+```
 
-2. Go in the repo and setup virtualenvironment using ```python -m virtualenv venv```
+## Dataset
 
-3. Then activate the environment using:
-- ```source venv/Scripts/activate``` on Windows
-- ```source venv/bin/activate``` on MacOS/Linux
+We used MovieLens Latest Small Dataset(generated on September 26, 2018) available at this link - http://files.grouplens.org/datasets/movielens/ml-latest-small.zip for this project. The dataset contains 100,836 ratings and 3,683 tag applications applied to 9,742 movies by 610 users. More details regarding the dataset are available here - http://files.grouplens.org/datasets/movielens/ml-latest-small-README.html.
 
-4. Move into the /imrdb directory using ```cd imrdb/```
+## Preview
 
-5. Install all requirements using ```pip install -r requirements.txt```
-
-6. After the above setup, run ```python manage.py makemigrations``` and ```python manage.py migrate```
-
-7. Start the backend server using ```python manage.py runserver```
-
-Default port: 8000
-
-Open http://localhost:8000 to view it in the browser.
+Coming soon

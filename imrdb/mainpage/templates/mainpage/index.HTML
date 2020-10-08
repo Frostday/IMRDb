@@ -5,21 +5,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- CSS -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
     <!-- icons -->
     <script src="https://kit.fontawesome.com/a7e5305de0.js" crossorigin="anonymous"></script>
 
     <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 
     <title>IMRDb</title>
@@ -39,24 +47,26 @@
                 <form class="container p-3 my-3 bg-transparent text-dark col-sm-5 rounded h-50">
                     <div style="padding-top: 30px;"></div>
                     <form method="GET">
-                    <div class="form-group card-block w-30 mx-auto">
-                        <label for="name"><strong>Search</strong></label>
-                        <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" id="anime_name" aria-describedby="emailHelp" placeholder="Enter Name of Movie">
-                    </div>
+                        <div class="form-group card-block w-30 mx-auto">
+                            <label for="name"><strong>Search</strong></label>
+                            <input type="text" class="form-control" name="q" value="{{ request.GET.q }}" id="anime_name"
+                                aria-describedby="emailHelp" placeholder="Enter Name of Movie">
+                        </div>
+                        <div class="card card-block w-25 mx-auto bg-dark">
+                            <button type="search" class="btn btn-primary">Search</button>
+                        </div>
                     </form>
-                    <div class="card card-block w-25 mx-auto bg-dark">
-                        <button type="search" class="btn btn-primary">Search</button>
-                    </div>
                     <div style="padding-top: 50px;"></div>
-                    <div class="card card-block mx-auto bg-secondary">
-                        <button type="recommend" class="btn btn-secondary" onclick="location.href='{% url 'rated' %}'">Rated Movies</button>
+                    <div class="card card-block w-25 mx-auto bg-secondary">
+                        <button type="recommend" class="btn btn-secondary"
+                            onclick="location.href='{% url 'rated' %}'">Rated Movies</button>
                     </div>
                     <div style="padding-top: 20px;"></div>
                     <form method="POST">
-                    <div class="card card-block mx-auto bg-success">
-                        {% csrf_token %}
-                        <button type="recommend" class="btn btn-success">Recommend Movies</button>
-                    </div>
+                        <div class="card card-block w-25 mx-auto bg-success">
+                            {% csrf_token %}
+                            <button type="recommend" class="btn btn-success">Recommend Movies</button>
+                        </div>
                     </form>
                 </form>
             </div>
@@ -83,31 +93,36 @@
         </div>
     </section>
 
-    <nav aria-label="Page navigation">   <ul class="pagination">
-        {% if movies.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page=1" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">begin</span>
-          </a>
-        </li>   {% endif %}
-        
-        {% for n in movies.paginator.page_range %}
-          {% if movies.number == n %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination" style="justify-content: center;">
+            {% if movies.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">begin</span>
+                </a>
+            </li> {% endif %}
+
+            {% for n in movies.paginator.page_range %}
+            {% if movies.number == n %}
             <li class="page-item active">
-              <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
+                <span class="page-link">{{ n }}<span class="sr-only">(current)</span></span>
             </li>
-          {% elif n > movies.number|add:'-3' and n < movies.number|add:'3' %}
+            {% elif n > movies.number|add:'-5' and n < movies.number|add:'5' %}
             <li class="page-item"><a class="page-link" href="?page={{ n }}">{{ n }}</a></li>
-          {% endif %}
-        {% endfor %}
-        
-        {% if movies.has_next %}
-          <li class="page-item">
-            <a class="page-link" href="?page={{ movies.paginator.num_pages }}" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">end</span>
-            </a>
-          </li>
-          {% endif %}   </ul> </nav>
+            {% endif %}
+            {% endfor %}
+
+            {% if movies.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ movies.paginator.num_pages }}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">end</span>
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
 </body>
+
+</HTML>
