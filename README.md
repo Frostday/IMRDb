@@ -1,5 +1,5 @@
 # IMRDb
-
+<center><img src="assets/logo.png" alt="logo"></center>
 Internet Movie Recommender Database is a website made using HTML, CSS and Django. An autoencoder was used for making the actual recommendation. It was trained on the ml-25m(small version) dataset.
 
 ## Creators

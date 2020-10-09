@@ -45,7 +45,8 @@
         <div class="row">
             <div class="col-sm-12 my-auto bg-dark">
                 <form class="container p-3 my-3 bg-transparent text-dark col-sm-5 rounded h-50">
-                    <div style="padding-top: 30px;"></div>
+                    <div style="padding-top: 20px;"></div>
+                    <center><img src="{% static 'logo.png' %}" alt="logo" onclick="location.href='{% url 'home' %}'"></center>
                     <form method="GET">
                         <div class="form-group card-block w-30 mx-auto">
                             <label for="name"><strong>Search</strong></label>
@@ -56,7 +57,7 @@
                             <button type="search" class="btn btn-primary">Search</button>
                         </div>
                     </form>
-                    <div style="padding-top: 50px;"></div>
+                    <div style="padding-top: 10px;"></div>
                     <div class="card card-block w-25 mx-auto bg-secondary">
                         <button type="recommend" class="btn btn-secondary"
                             onclick="location.href='{% url 'rated' %}'">Rated Movies</button>
