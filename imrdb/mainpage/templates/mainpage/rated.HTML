@@ -40,11 +40,13 @@
             {% for key, value in dict.items %}
             <li class="list-group-item bg-dark text-white border border-white">
                 <div class="row">
-                    <p style="font-size:200%; width: 85%; text-align: center;">
+                    <p style="font-size:200%; width: 70%; text-align: center;">
                         {{ key }}
                     </p>
                     <div style="text-align-last: right;">
-                        <span style="font-size:200%; color:yellow;">{{ value }} &star;</span>
+                        <span style="font-size:200%; color:yellow;">{{ value }} &star;
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </span>
                     </div>
                 </div>
             </li>
