@@ -1,18 +1,26 @@
 <HTML>
+{% load static %}
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- icons -->
     <script src="https://kit.fontawesome.com/a7e5305de0.js" crossorigin="anonymous"></script>
 
     <!-- JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 
     <title>IMRDb</title>
@@ -20,7 +28,11 @@
 
 <body style="background-size: cover; background-position: center; background-repeat: no-repeat;">
     <div class="jumbotron bg-dark text-white">
-        <h1>Movies Rated by You</h1>
+        <center><img src="{% static 'logo.png' %}" alt="logo" onclick="location.href='{% url 'home' %}'"></center>
+        <div style="padding-top: 20px;"></div>
+        <center>
+            <h1>Movies Rated by You</h1>
+        </center>
     </div>
     <div style="padding-top: 30px;"></div>
     <div class="container">
@@ -28,15 +40,18 @@
             {% for key, value in dict.items %}
             <li class="list-group-item bg-dark text-white border border-white">
                 <div class="row">
-                    <p style="font-size:200%; width: 85%; text-align: center;">
+                    <p style="font-size:200%; width: 70%; text-align: center;">
                         {{ key }}
                     </p>
                     <div style="text-align-last: right;">
-                        <span style="font-size:200%; color:yellow;">{{ value }} &star;</span>
+                        <span style="font-size:200%; color:yellow;">{{ value }} &star;
+                            <button type="button" class="btn btn-danger">Delete</button>
+                        </span>
                     </div>
                 </div>
             </li>
             {% endfor %}
         </ul>
+        <div style="padding-top: 50px;"></div>
     </div>
 </body>
