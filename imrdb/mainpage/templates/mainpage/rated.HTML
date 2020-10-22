@@ -33,6 +33,13 @@
         <center>
             <h1>Movies Rated by You</h1>
         </center>
+        <br>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <center>
+            <button type="submit" class="btn btn-danger">Delete all</button>
+            </center>
+        </form>
     </div>
     <div style="padding-top: 30px;"></div>
     <div class="container">
@@ -45,7 +52,6 @@
                     </p>
                     <div style="text-align-last: right;">
                         <span style="font-size:200%; color:yellow;">{{ value }} &star;
-                            <button type="button" class="btn btn-danger">Delete</button>
                         </span>
                     </div>
                 </div>
