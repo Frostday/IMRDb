@@ -15,15 +15,14 @@ from random import shuffle
 # Create your views here.
 def homepage(request):
     movies = Movie.objects.all()
-    movies_list = list(movies)
-    shuffle(movies_list)
     page = request.GET.get('page', 1)
     query = request.GET.get("q")
     if query:
         movies = movies.filter(
             Q(name__icontains=query)
         ).distinct()
-
+    movies_list = list(movies)
+    shuffle(movies_list)
     paginator = Paginator(movies_list, 24)
     try:
         movies = paginator.page(page)
