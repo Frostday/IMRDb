@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Movie
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
@@ -6,16 +6,21 @@ import pickle
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from star_ratings.models import UserRating
 from django.http import HttpResponse
+from django.contrib import messages
+from random import shuffle
+
 
 
 
 # Create your views here.
 def homepage(request):
-    movies_list = Movie.objects.all()
+    movies = Movie.objects.all()
+    movies_list = list(movies)
+    shuffle(movies_list)
     page = request.GET.get('page', 1)
     query = request.GET.get("q")
     if query:
-        movies_list = movies_list.filter(
+        movies = movies.filter(
             Q(name__icontains=query)
         ).distinct()
 
@@ -39,12 +44,26 @@ def homepage(request):
 def ratedpage(request):
     user_ratings = UserRating.objects.all()
     d = {}
+    # data = request.POST.copy()
+    # print("deleted called")
+    # c_id = int(data.get('id', '0'))
+    # print(type(c_id))
+    # print(c_id)
+    # if c_id>0:
+    #     print("if called")
+    #     rating = UserRating.objects.get(id=c_id)
+    #     rating.delete()
+    #     return HttpResponse("Deleted!")
+    if request.method == "POST":
+        print("delete called")
+        user_ratings.delete()
+        messages.success(request, "All ratings deleted")
+        
     for index in user_ratings:
         movie = Movie.objects.get(id=index.rating.object_id)
         d[movie.name] = index.score
-    print(d)
     return render(request, 'mainpage/rated.html', {'dict': d})
-
+    
 
 import numpy as np
 import pandas as pd
